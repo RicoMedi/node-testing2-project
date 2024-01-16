@@ -2,11 +2,17 @@ const router = require('express').Router()
 const Travel= require('./travel-model')
 
 
-router.get('/:travel_id', (req, res, next)=>{
-    Travel.getTraveId(req.params.travel_id)
-    .then(resource =>{
-        res.status(200).json(resource)
+router.get('/', (req, res, next)=>{
+    Travel.getCountrys()
+    .then(result =>{
+        res.status(200).json(result)
     }).catch(next)
+})
+
+router.delete('/:id', async(req, res)=>{
+   const id= req.params.id
+   const delCountry= await Travel.deleteCountry(id)
+   res.status(200).json(delCountry)
 })
 
 

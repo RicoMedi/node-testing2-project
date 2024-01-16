@@ -5,7 +5,7 @@ const server= express()
 
 server.use(express.json())
 
-server.use('/api/travel', travelRouter)
+server.use('/country', travelRouter)
 
 server.use('*', (req, res)=>{
     res.json({api: 'up'})

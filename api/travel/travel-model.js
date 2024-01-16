@@ -1,16 +1,21 @@
-const db= require('../../data/db-config')
+const db = require("../../data/db-config");
 
-function getTraveId(travel_id) {
-    return Promise.resolve(`awesome place to travel to with id ${travel_id}`)
+async function getCountrys(){
+    return await db('country')
 }
 
-async function createCountry(country){
-const [id]=  await db('country').insert(country)
-
-return db('country').where('country_id', id).first()
+async function createCountry(country) {
+  const [id] = await db("country").insert(country);
+  return db("country").where("country_id", id).first();
 }
 
+async function deleteCountry(id) {
+    const country= await db('country').where("country_id", id).first()
+    await db('country').where('country_id', id).del()
+    return country
+}
 module.exports = {
-    getTraveId,
-    createCountry
-}
+    getCountrys,
+  createCountry,
+  deleteCountry,
+};
